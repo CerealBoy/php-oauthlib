@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="php-oauthlib" default="ci" basedir=".">
+    <property name="product" value="php-oauthlib" />
+    <property name="version" value="0.0.1" />
+
+    <tstamp>
+        <format property="build.time" pattern="yyyyMMdd-HHmmss" />
+    </tstamp>
+    <property name="build.name" value="${product}-${version}-${build.time}" />
+
+    <target name="clean">
+        <delete dir="${basedir}/build/results" />
+    </target>
+
+    <target name="setup">
+        <mkdir dir="${basedir}/build/results" />
+        <mkdir dir="${basedir}/build/results/logs" />
+        <mkdir dir="${basedir}/build/results/docs" />
+        <mkdir dir="${basedir}/build/results/phpunit" />
+        <mkdir dir="${basedir}/build/results/coverage" />
+    </target>
+
+    <target name="test">
+        <exec executable="bash" dir="${basedir}/build" failonerror="true">
+            <arg value="-c" />
+            <arg line='"phpunit --configuration ${basedir}/build/tests.xml --process-isolation"' />
+        </exec>
+    </target>
+
+    <target name="doc">
+        <exec executable="phpdoc" dir="${basedir}" failonerror="off">
+            <arg line="-d src/ -t build/docs" />
+        </exec>
+    </target>
+
+    <target name="release">
+        <tar destfile="${basedir}/build/${build.name}.tar.gz" compression="gzip" longfile="gnu">
+            <tarfileset dir="${basedir}">
+                <include name="*/**" />
+
+                <exclude name="**/.git/**" />
+                <exclude name=".gitignore" />
+                <exclude name="build/" />
+                <exclude name="build.xml" />
+            </tarfileset>
+        </tar>
+    </target>
+
+    <target name="ci" depends="clean,setup,test,doc" />
+</project>
