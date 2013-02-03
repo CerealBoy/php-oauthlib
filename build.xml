@@ -29,7 +29,7 @@
 
     <target name="doc">
         <exec executable="phpdoc" dir="${basedir}" failonerror="off">
-            <arg line="-d src/ -t build/docs" />
+            <arg line="-d src/ -t build/results/docs" />
         </exec>
     </target>
 
