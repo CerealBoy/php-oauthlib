@@ -15,6 +15,18 @@ A library to use the PECL OAuth library for dealing with major OAuth providers.
 
 Please see the examples within the examples directory file for usage.
 
+##Tests
+
+To run the tests, use the following:
+```
+ant ci
+```
+
+For the full build, use:
+```
+ant ci release
+```
+
 ##License
 
 ```
