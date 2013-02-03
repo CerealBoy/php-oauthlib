@@ -1,9 +1,28 @@
 <?php
+/**
+ * Main OAuth class.
+ *
+ * @namespace OAuthLib
+ * @package php-oauthlib
+ * @author Allan Shone <allan.shone@yahoo.com>
+ */
 
 namespace OAuthLib;
 
+/**
+ * The OAuth class.
+ *
+ * This class provides all access and usage for OAuth.
+ *   Whilst there are other classes provided within the OAuthLib namespace,
+ *   this is the gateway and interfacing class.
+ */
 class OAuth
 {
+    /**
+     * Constructor for OAuth.
+     *
+     * Setup an OAuth instance and prepare ofr authentication.
+     */
     public function __construct()
     {
         //
