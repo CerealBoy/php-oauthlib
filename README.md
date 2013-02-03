@@ -12,12 +12,12 @@ A library to use the PECL OAuth library for dealing with major OAuth providers.
 
 ##Usage
 
-Please see the example.php file for a walkthrough.
+Please see the examples within the examples directory file for usage.
 
 ##License
 
 ```
-Copyright 2012 Allan Shone
+Copyright 2013 Allan Shone
 Licensed under the Apache License v2.0
 http://www.apache.org/licenses/LICENSE-2.0
 ```
