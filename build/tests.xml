@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit bootstrap="bootstrap.php" convertErrorsToExceptions="true" convertNoticesToExceptions="true" convertWarningsToExceptions="true" strict="true" checkSyntax="true">
+    <testsuites>
+        <testsuite name="unit-tests">
+            <directory>./unit-tests</directory>
+        </testsuite>
+
+        <testsuite name="integration-tests">
+            <directory>./integration-tests</directory>
+        </testsuite>
+    </testsuites>
+
+    <filter>
+        <whitelist>
+            <directory suffix=".php">../src</directory>
+        </whitelist>
+    </filter>
+
+    <logging>
+        <log type="coverage-html" target="../build/results/coverage" charset="UTF-8" yui="true" highlight="false" />
+        <log type="coverage-clover" target="../build/results/clover.xml"/>
+        <log type="junit" target="../build/results/junit.xml" logIncompleteSkipped="false"/>
+    </logging>
+</phpunit>
+
