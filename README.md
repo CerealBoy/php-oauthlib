@@ -7,8 +7,9 @@ A library to use the PECL OAuth library for dealing with major OAuth providers.
 
 ##Requirements
 
-* **php** >= 5.3.2 (tested)
-* **oauth** (pecl) >= 1.2.2
+* **php** >= 5.4.9 (tested)
+* **oauth** (pecl) >= 1.2.3
+* **curl** >= 7.21.4
 
 ##Usage
 
