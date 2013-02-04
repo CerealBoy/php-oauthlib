@@ -51,10 +51,88 @@ class OAuthProvider
      *
      * Using the current provider, push default content into
      *  self::$data ready for updating.
+     *
+     * @param string $provider
+     *  The name of the provider to set the defaults for.
+     * @throws RuntimeException
+     * @return null
      */
-    private function defaults()
+    private function defaults($provider)
     {
-        //
+        $provider = strtolower(trim($provider));
+        $this->data['title'] = $provider;
+
+        switch ($provider) {
+            case 'twitter':
+                $this->data['tokenurl'] = 'https://api.twitter.com/oauth/request_token';
+                $this->data['authoriseurl'] = 'https://api.twitter.com/oauth/authorize';
+                $this->data['accessurl'] = 'https://api.twitter.com/oauth/access_token';
+                $this->data['apiurl'] = 'https://api.twitter.com/1/account/verify_credentials.json';
+
+                $this->data['sig'] = OAUTH_SIG_METHOD_HMACSHA1;
+                $this->data['authtype'] = OAUTH_AUTH_TYPE_AUTHORIZATION;
+
+                break;
+
+            case 'facebook':
+                $this->data['authoriseurl'] = 'https://www.facebook.com/dialog/oauth';
+                $this->data['accessurl'] = 'https://graph.facebook.com/oauth/access_token';
+                $this->data['apiurl'] = 'https://graph.facebook.com/me';
+
+                $this->data['sig'] = OAUTH_SIG_METHOD_HMACSHA1;
+                $this->data['authtype'] = OAUTH_AUTH_TYPE_URI;
+
+                break;
+
+            case 'yahoo':
+                $this->data['tokenurl'] = 'https://api.login.yahoo.com/oauth/v2/get_request_token';
+                $this->data['authoriseurl'] = 'https://api.login.yahoo.com/oauth/v2/request_auth';
+                $this->data['accessurl'] = 'https://api.login.yahoo.com/oauth/v2/get_token';
+                $this->data['apiurl'] = 'http://social.yahooapis.com/v1/user/{xoauth_yahoo_guid}/profile';
+
+                $this->data['sig'] = OAUTH_SIG_METHOD_HMACSHA1;
+                $this->data['acctype'] = 'PLAINTEXT';
+                $this->data['authtype'] = OAUTH_AUTH_TYPE_URI;
+
+                break;
+
+            case 'google':
+                $this->data['tokenurl'] = 'https://www.google.com/accounts/OAuthGetRequestToken';
+                $this->data['authoriseurl'] = 'https://www.google.com/accounts/OAuthAuthorizeToken';
+                $this->data['accessurl'] = 'https://www.google.com/accounts/OAuthGetAccessToken';
+                $this->data['apiurl'] = 'http://www-opensocial.googleusercontent.com/api/people/@me/@self';
+
+                $this->data['sig'] = OAUTH_SIG_METHOD_HMACSHA1;
+                $this->data['authtype'] = OAUTH_AUTH_TYPE_URI;
+                $this->data['scope'] = 'http://www-opensocial.googleusercontent.com/api/people/';
+
+                break;
+
+            case 'myspace':
+                $this->data['tokenurl'] = 'http://api.myspace.com/request_token';
+                $this->data['authoriseurl'] = 'http://api.myspace.com/authorize';
+                $this->data['accessurl'] = 'http://api.myspace.com/access_token';
+                $this->data['apiurl'] = 'http://api.myspace.com/1.0/people/@me/@self?format=json';
+
+                $this->data['sig'] = OAUTH_SIG_METHOD_HMACSHA1;
+                $this->data['authtype'] = OAUTH_AUTH_TYPE_URI;
+
+                break;
+
+            case 'linkedin':
+                $this->data['tokenurl'] = 'https://api.linkedin.com/uas/oauth/requestToken';
+                $this->data['authoriseurl'] = 'https://www.linkedin.com/uas/oauth/authorize';
+                $this->data['accessurl'] = 'https://api.linkedin.com/uas/oauth/accessToken';
+                $this->data['apiurl'] = 'http://api.linkedin.com/v1/people/~';
+
+                $this->data['sig'] = OAUTH_SIG_METHOD_HMACSHA1;
+                $this->data['authtype'] = OAUTH_AUTH_TYPE_URI;
+
+                break;
+
+            default:
+                throw new \RuntimeException('Invalid provider selected');
+        }
     }
 
     /**
