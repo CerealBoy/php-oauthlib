@@ -21,7 +21,7 @@ class OAuth
     /**
      * Constructor for OAuth.
      *
-     * Setup an OAuth instance and prepare ofr authentication.
+     * Setup an OAuth instance and prepare for authentication.
      */
     public function __construct()
     {
