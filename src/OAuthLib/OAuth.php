@@ -1,9 +1,6 @@
 <?php
 /**
  * Main OAuth class.
- *
- * @author Allan Shone <allan.shone@yahoo.com>
- * @date Feb 2, 2013
  */
 
 namespace OAuthLib;
@@ -17,6 +14,8 @@ namespace OAuthLib;
  *
  * @package php-oauthlib
  * @namespace OAuthLib
+ * @author Allan Shone <allan.shone@yahoo.com>
+ * @since Feb 2, 2013
  */
 class OAuth
 {
