@@ -47,6 +47,23 @@ class OAuthProvider
     }
 
     /**
+     * Acquire an attribute of the provider.
+     *
+     * @param string $name
+     *  The attribute to acquire.
+     * @throws RuntimeException
+     * @return mixed
+     */
+    public function get($name)
+    {
+        if (!isset($this->data[$name])) {
+            throw new \RuntimeException('Invalid OAuthProvider attribute for get()');
+        }
+
+        return $this->data[$name];
+    }
+
+    /**
      * Seed our data with some default content.
      *
      * Using the current provider, push default content into
