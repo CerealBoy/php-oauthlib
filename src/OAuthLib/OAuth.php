@@ -30,6 +30,19 @@ class OAuth
     }
 
     /**
+     * Take the available data and determine context.
+     *
+     * @param array $details
+     *  All contextual information.
+     * @return string
+     * @throws RuntimeException
+     */
+    public function context($details)
+    {
+        //
+    }
+
+    /**
      * Data for state and setting.
      *
      * <pre>
