@@ -43,7 +43,7 @@ class OAuthProvider
             throw new \RuntimeException('Invalid OAuthProvider attribute for set()');
         }
 
-        //
+        $this->data[$name] = $value;
     }
 
     /**
