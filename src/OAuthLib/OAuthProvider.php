@@ -21,10 +21,14 @@ class OAuthProvider
 {
     /**
      * Default constructor.
+     *
+     * @param string $provider
+     *  The provider for this instance.
+     * @throws RuntimeException
      */
-    public function __construct()
+    public function __construct($provider)
     {
-        //
+        $this->defaults($provider);
     }
 
     /**
