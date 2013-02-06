@@ -19,6 +19,8 @@ namespace OAuthLib;
  */
 class OAuth
 {
+    use OAuthShared;
+
     /**
      * Constructor for OAuth.
      *
@@ -39,7 +41,11 @@ class OAuth
      */
     public function context($details)
     {
-        //
+        if (is_array($details)) {
+            //
+        } else {
+            //
+        }
     }
 
     /**

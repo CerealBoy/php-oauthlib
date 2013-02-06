@@ -19,6 +19,8 @@ namespace OAuthLib;
  */
 class OAuthProvider
 {
+    use OAuthShared;
+
     /**
      * Default constructor.
      *
