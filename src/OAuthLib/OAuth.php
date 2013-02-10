@@ -115,6 +115,8 @@ class OAuth
      *  <b>indexer</b> temp cookie index
      *  <b>salt</b> salt for use with hashing
      *  <b>cookie</b> current content of the cookie
+     *  <b>host</b> host for cookie being set in
+     *  <b>authed</b> if full authentication is achieved
      * </pre>
      *
      * @var array
@@ -126,6 +128,7 @@ class OAuth
         'salt' => 'This1s5@It,8008135',
         'cookie' => array(),
         'host' => '',
+        'authed' => false,
     );
 }
 
