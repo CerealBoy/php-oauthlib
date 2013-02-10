@@ -49,6 +49,29 @@ class OAuth
     }
 
     /**
+     * Sign data details.
+     *
+     * Generate the signature for all known data. This is used for client-side
+     *  state management and request details, i.e. having a session to be stored
+     *  in a cookie for easy use between requests.
+     *
+     * @throws RuntimeException
+     * @return string
+     */
+    public function signature()
+    {
+        $flatten = http_build_query($this->data['cookie']);
+
+        $hash = hash_hmac(
+            $this->data['hash-algorithm'],
+            'salt' . $flatten . $this->data['salt'],
+            $this->data['salt']
+        );
+
+        return base64_encode($hash);
+    }
+
+    /**
      * Data for state and setting.
      *
      * <pre>
