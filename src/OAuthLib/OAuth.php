@@ -93,7 +93,7 @@ class OAuth
         $details = array_merge($this->data['cookie'], 'sig' => $signature);
         $cookie = setrawcookie(
             $this->data['indexing'],
-            rawurlencode(http_build_query($details)),
+            rawurlencode(base64_encode(http_build_query($details))),
             time() + (3600 * 24),
             '/',
             $this->data['host'],
