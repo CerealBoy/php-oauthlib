@@ -72,6 +72,41 @@ class OAuth
     }
 
     /**
+     * Sets the cookie with current auth details.
+     *
+     * Ensure the current status is valid, and then use the current settings
+     *  to store all auth information in cookie.
+     *
+     * @return bool
+     * @throws RuntimeException
+     * @throws InvalidArgumentException
+     * @see OAuthLib\OAuth::signature()
+     */
+    public function setCookie()
+    {
+        if (empty($this->data['cookie']) || count($this->data['cookie']) < 1) {
+            throw new \InvalidArgumentException('Invalid content for setting cookie');
+        }
+
+        $signature = $this->signature();
+
+        $details = array_merge($this->data['cookie'], 'sig' => $signature);
+        $cookie = setrawcookie(
+            $this->data['indexing'],
+            rawurlencode(http_build_query($details)),
+            time() + (3600 * 24),
+            '/',
+            $this->data['host'],
+            false,
+            true
+        );
+
+        if (!$cookie) {
+            throw new \RuntimeException('Unable to set cookie');
+        }
+    }
+
+    /**
      * Data for state and setting.
      *
      * <pre>
@@ -90,6 +125,7 @@ class OAuth
         'indexer' => 'vb',
         'salt' => 'This1s5@It,8008135',
         'cookie' => array(),
+        'host' => '',
     );
 }
 
