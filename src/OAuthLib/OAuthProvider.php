@@ -69,6 +69,18 @@ class OAuthProvider
         return $this->data[$name];
     }
 
+
+    /**
+     * Run the necessary requests and details for acquiring the token.
+     *
+     * @throws RuntimeException
+     * @return string
+     */
+    public function token()
+    {
+        //
+    }
+
     /**
      * Seed our data with some default content.
      *
