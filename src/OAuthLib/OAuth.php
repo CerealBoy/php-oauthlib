@@ -41,35 +41,54 @@ class OAuth
      */
     public function context($details)
     {
-        if (is_array($details)) {
-            foreach ($details as $name => $value) {
-                if ($name === 'authed' || $name === 'cookie') {
-                    continue;
-                }
-
-                if (isset($this->data[$name])) {
-                    $this->data[$name] = $value;
-                } else {
-                    $this->giveProvider($name, $value);
-                }
-            }
-        } else {
+        if (!is_array($details)) {
             throw new \InvalidArgumentException('Context should be an array');
         }
 
-        if (empty($details['provider'])) {
-            throw new \InvalidArgumentException('A provider is required in context()');
+        if (!isset($details['provider'])) {
+            throw new \InvalidArgumentException('Provider is required in context');
+        }
+
+        $this->provider = new OAuthProvider($details['provider']);
+
+        foreach ($details as $name => $value) {
+            switch ($name) {
+                case 'hash-algorithm':
+                case 'indexing':
+                case 'indexer':
+                case 'salt':
+                case 'host':
+                    $this->data[$name] = $value;
+                    break;
+
+                default:
+                    $this->giveProvider($name, $value);
+                    break;
+            }
         }
     }
 
     /**
+     * Pass through data to provider.
      *
+     * From the initial context ingestion, ensure
+     *  the provider has enough data to complete any
+     *  necessary actions when required.
      *
-     *
+     * @param string $name
+     *  The name of the data attribute.
+     * @param mixed $value
+     *  The accompanying data value.
+     * @throws \RuntimeException
+     * @return bool
      */
     private function giveProvider($name, $value)
     {
-        //
+        try {
+            $this->provider->set($name, $value);
+        } catch (\RuntimeException $e) {
+            //
+        }
     }
 
     /**
@@ -154,5 +173,12 @@ class OAuth
         'host' => '',
         'authed' => false,
     );
+
+    /**
+     * Current provider object.
+     *
+     * @var OAuthLib\OAuthProvider
+     */
+    private $provider;
 }
 
