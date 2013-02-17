@@ -57,7 +57,7 @@ class OAuth
             throw new \InvalidArgumentException('Context should be an array');
         }
 
-        if (empty($this->data['provider'])) {
+        if (empty($details['provider'])) {
             throw new \InvalidArgumentException('A provider is required in context()');
         }
     }
