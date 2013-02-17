@@ -42,10 +42,34 @@ class OAuth
     public function context($details)
     {
         if (is_array($details)) {
-            //
+            foreach ($details as $name => $value) {
+                if ($name === 'authed' || $name === 'cookie') {
+                    continue;
+                }
+
+                if (isset($this->data[$name])) {
+                    $this->data[$name] = $value;
+                } else {
+                    $this->giveProvider($name, $value);
+                }
+            }
         } else {
-            //
+            throw new \InvalidArgumentException('Context should be an array');
         }
+
+        if (empty($this->data['provider'])) {
+            throw new \InvalidArgumentException('A provider is required in context()');
+        }
+    }
+
+    /**
+     *
+     *
+     *
+     */
+    private function giveProvider($name, $value)
+    {
+        //
     }
 
     /**
