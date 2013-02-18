@@ -87,7 +87,8 @@ class OAuth
         try {
             $this->provider->set($name, $value);
         } catch (\RuntimeException $e) {
-            //
+            // could be silent here, let's revisit
+            error_log("Error encountered sending to provider: {$e}");
         }
     }
 
