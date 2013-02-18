@@ -77,7 +77,26 @@ class OAuthProvider
      */
     public function token()
     {
-        //
+        $this->load();
+
+        // 
+    }
+
+    /**
+     * Fire up the global oauth object as required.
+     *
+     * @see \oauth
+     * @throws \RuntimeException
+     */
+    private function load()
+    {
+        if (!is_a($this->oauth, "\oauth")) {
+            $this->oauth = new \oauth($this->data['id'], $this->data['secret'], $this->data['sig'], $this->data['authtype']);
+
+            if (!is_a($this->oauth, "\oauth")) {
+                throw new \RuntimeException('Unable to load global oauth object');
+            }
+        }
     }
 
     /**
@@ -204,5 +223,12 @@ class OAuthProvider
         'acctype' => '',
         'scope' => '',
     );
+
+    /**
+     * Keep the global oauth object.
+     *
+     * @var \oauth
+     */
+    private $oauth;
 }
 
