@@ -79,7 +79,15 @@ class OAuthProvider
     {
         $this->load();
 
-        // 
+        $token_url = $this->data['tokenurl'];
+        if (strlen($token_url) < 1) {
+            // FB will fall through here
+            if ($this->data['title'] === 'facebook') {
+                return '';
+            }
+
+            throw new \RuntimeException('Invalid URL for Token acquisition');
+        }
     }
 
     /**
