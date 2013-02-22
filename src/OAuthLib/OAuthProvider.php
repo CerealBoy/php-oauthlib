@@ -82,7 +82,7 @@ class OAuthProvider
         $token_url = $this->data['tokenurl'];
         if (strlen($token_url) < 1) {
             // FB will fall through here
-            if ($this->data['title'] === 'facebook') {
+            if ($this->data['provider'] === 'facebook') {
                 return '';
             }
 
@@ -121,7 +121,7 @@ class OAuthProvider
     private function defaults($provider)
     {
         $provider = strtolower(trim($provider));
-        $this->data['title'] = $provider;
+        $this->data['provider'] = $provider;
 
         switch ($provider) {
             case 'twitter':
@@ -203,7 +203,7 @@ class OAuthProvider
      *  Defaults are contained within self::defaults()
      *
      * <pre>
-     *  <b>title</b> textual identifier
+     *  <b>provider</b> textual identifier
      *  <b>id</b> identifier for account interaction
      *  <b>secret</b> accompanying secret for id
      *  <b>tokenurl</b> url for token generation
@@ -218,7 +218,7 @@ class OAuthProvider
      * </pre>
      */
     private $data = array(
-        'title' => '',
+        'provider' => '',
         'id' => '',
         'secret' => '',
         'tokenurl' => '',
