@@ -18,7 +18,7 @@ class OAuthTest extends PHPUnit_Framework_TestCase
         ));
         $signature = $lib->signature();
 
-        $this->assertEquals('replace-this-string', $signature);
+        $this->assertEquals('MzJjZWVjOGE2YzJhZGYxMDdlZmFmOWU2ODlmZjVlOWQzZmNmYWE3MDBjODA5YTc4ODUzYWFiMTJjNDFhNjJmZDIwZTFkNGNhYjJmMDJiYzcxMTQ0YThhYTQwZWE0OWNmZjQ4MGY5MThlMGJjZjc0YzUzM2VmZWU0MzY3NGUwODA=', $signature);
     }
 }
 
