@@ -62,7 +62,11 @@ class OAuth
                     break;
 
                 default:
-                    $this->giveProvider($name, $value);
+                    $result = $this->giveProvider($name, $value);
+                    if (!$result) {
+                        throw new \RuntimeException('Invalid application to provider');
+                    }
+
                     break;
             }
         }
@@ -86,9 +90,10 @@ class OAuth
     {
         try {
             $this->provider->set($name, $value);
+
+            return true;
         } catch (\RuntimeException $e) {
-            // could be silent here, let's revisit
-            error_log("Error encountered sending to provider: {$e}");
+            return false;
         }
     }
 
